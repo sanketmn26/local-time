@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'digital-7';
+            src: url(digital-7-regular.ttf);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 2vw;
+            background-color: black;
+
+        }
+
+        #main {
+            width: 75vw;
+            height: 10em;
+            /* border: 1px black solid; */
+            margin: auto;
+            margin-top: 15vh;
+            font-family: 'digital-7', sans-serif;
+            font-size: 2vw;
+            color: rgb(0, 255, 1);
+
+        }
+
+
+        #time {
+            width: 90%;
+            height: 75%;
+            /* border: 1px red solid; */
+            margin: auto;
+            display: flex;
+        }
+
+        .colon {
+            font-size: 8em;
+        }
+
+        .time {
+            width: 27%;
+            height: 100%;
+            /* border: 1px blue solid; */
+            font-size: 8em;
+            text-align: center;
+        }
+
+        #ms {
+            width: 15%;
+            height: 100%;
+            /* border: 1px blue solid; */
+            display: block;
+        }
+
+        #format {
+            width: 95%;
+            height: 50%;
+            margin-top: 0.4em;
+            /* border: black 1px solid; */
+            font-size: 2em;
+        }
+
+        #ms1 {
+            width: 95%;
+            height: 40%;
+            /* border: black 1px solid; */
+            font-size: 2em;
+        }
+
+        #date {
+            width: 70%;
+            height: 25%;
+            margin: auto;
+            /* border: 1px solid green; */
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="main">
+        <div id="time">
+            <div id="hh" class="time"></div><span class="colon">:</span>
+            <div id="mm" class="time"></div><span class="colon">:</span>
+            <div id="ss" class="time"></div>
+            <div id="ms">
+                <div id="format"></div>
+                <div id="ms1"></div>
+            </div>
+        </div>
+        <div id="date"></div>
+    </div>
+
+
+    <script>
+        function get_time() {
+            var today = new Date();
+            var hh = today.getHours();
+            var mm = today.getMinutes();
+            var ss = today.getSeconds();
+            var ms = today.getMilliseconds();
+            var date = today.getDate();
+            var month = today.getMonth();
+            var year = today.getFullYear();
+            var day = today.getDay();
+            var format;
+
+            var days_arr = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURDAY', 'FRIDAY', 'SATURDAY'];
+
+            var months_arr = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+
+
+            month = months_arr[month];
+            day = days_arr[day];
+
+            var full_date = day + ", &nbsp" + month + "&nbsp &nbsp" + date + "&nbsp &nbsp" + year;
+
+            if (hh > 11) {
+                format = "PM"
+            }
+            else {
+                format = "AM"
+            }
+
+            if (hh > 12) {
+                hh = hh - 12;
+            }
+
+
+            if (hh < 10) {
+                hh = "0" + hh;
+            }
+
+
+            if (mm < 10) {
+                mm = "0" + mm;
+            }
+
+
+            if (ss < 10) {
+                ss = "0" + ss;
+            }
+
+
+            if (ms < 10) {
+                ms = "0" + "0" + ms;
+            }
+            else if (ms < 100) {
+                ms = "0" + ms;
+            }
+
+            document.getElementById('hh').innerHTML = hh;
+            document.getElementById('mm').innerHTML = mm;
+            document.getElementById('ss').innerHTML = ss;
+            document.getElementById('format').innerHTML = format;
+            document.getElementById('ms1').innerHTML = ms;
+            document.getElementById('date').innerHTML = full_date;
+
+
+
+
+
+        }
+
+        setInterval(get_time, 1);
+
+    </script>
+</body>
+
+</html>
